@@ -44,7 +44,7 @@ jobs:
       # Create tag file and build the LaTeX document
       - name: "Create tag file"
         run: |
-          echo "${{ github.event.inputs.tag }}" > paper/repo_tag.tex
+          echo ${{ github.event.inputs.tag }} > paper/header.txt
           ls paper
 
       - name: "Build the LaTeX document"
@@ -54,7 +54,7 @@ jobs:
 
       - name: "Clean up tag file"
         run: |
-          rm -f paper/repo_tag.tex
+          rm -f paper/header.txt
 
   release:
     runs-on: ubuntu-latest

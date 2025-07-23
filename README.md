@@ -49,6 +49,10 @@ input during releases
 If the `REPO_TAG` environment variable is not set, no tag will
 be displayed in the document header.
 
+Additionally, if a file named `header_text.txt` exists in the paper directory,
+its contents will be included in the header. This allows you to add custom text
+to the header without modifying the LaTeX code.
+
 ### **🔍 Click on the header of your README.md file**
 
 The header links to your compiled document.
