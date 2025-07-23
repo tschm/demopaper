@@ -41,12 +41,6 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      - name: Install Tectonic
-        working-directory: paper
-        run: |
-          curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-          ./tectonic --version
-
       - name: Create header.txt
         working-directory: paper
         run: |
@@ -56,28 +50,12 @@ jobs:
           # display the header.txt file
           cat header.txt
 
-      - name: Compile LaTeX document
-        working-directory: paper
-        run: |
-          mkdir -p compiled
-          cat header.txt
-          ./tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
-
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+      - name: Compile LateX
+        uses: tschm/cradle/actions/latex@main
         with:
-          name: compiled-pdf
-          path: paper/compiled/document.pdf
-
-
-      #- name: "Build the LaTeX document"
-      #  uses: tschm/cradle/actions/latex@v0.3.04  # Custom action to build LaTeX documents
-      #  with:
-      #    paper: paper/document.tex
-
-      #- name: "Clean up tag file"
-      #  run: |
-      #    rm -f paper/header.txt
+          tex-file: document.tex
+          tex-folder: paper
+          target-branch: draft
 
   release:
     runs-on: ubuntu-latest
