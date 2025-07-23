@@ -1,0 +1,46 @@
+name: Build LaTeX PDF
+
+on:
+  push:
+    paths:
+      - 'paper/**'
+  pull_request:
+    paths:
+      - 'paper/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Compile LaTeX with Tectonic
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Tectonic
+        run: |
+          curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+          ./tectonic --version
+
+      - name: Create header.txt
+        run: |
+          touch paper/header.txt
+
+          echo "Repo: ${{ github.repository }}\n" >> paper/header.txt
+          echo "Version: ${{ github.event.inputs.tag }}\n" >> paper/header.txt
+          echo "Date: $(date '+%d %B %Y')\n" >> paper/header.txt
+
+          # display the header.txt file
+          cat paper/header.txt
+
+      - name: Compile LaTeX document
+        working-directory: paper
+        run: |
+          mkdir -p ../compiled
+          ../tectonic document.tex --outdir ../compiled --keep-logs --keep-intermediates
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdf
+          path: compiled/document.pdf
