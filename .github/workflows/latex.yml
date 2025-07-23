@@ -51,7 +51,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: "draft"
-          folder: paper/compiled
+          folder: paper/**/*.pdf
           commit-message: "Compiled paper"
           clean: true
           single-commit: false
