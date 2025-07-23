@@ -24,11 +24,13 @@ help:  ## Display this help screen
 .PHONY: compile
 compile: ## Compile document(s)
 	@if [ -n "$(REPO_TAG)" ]; then \
-		export REPO_TAG="$(REPO_TAG)"; \
+		echo "$(REPO_TAG)" > paper/repo_tag.tex; \
 		./tectonic paper/document.tex; \
-		unset REPO_TAG; \
+		rm -f paper/repo_tag.tex; \
 	else \
+		echo "" > paper/repo_tag.tex; \
 		./tectonic paper/document.tex; \
+		rm -f paper/repo_tag.tex; \
 	fi
 
 

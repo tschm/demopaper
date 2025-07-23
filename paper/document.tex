@@ -13,10 +13,9 @@
 \definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
 \definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
 
-% Define a command for the repository tag from environment variable
+% Define a command for the repository tag from file
 \newcommand{\repotag}{%
-  \CatchFileEdef{\repotagval}{|kpsewhich --var-value=REPO_TAG}{}%
-  \ifx\repotagval\empty\else\repotagval\fi%
+  \InputIfFileExists{repo_tag.tex}{}{}%
 }
 
 % Setup fancy headers

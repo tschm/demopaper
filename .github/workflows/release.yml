@@ -41,13 +41,19 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      # Build the LaTeX document with tag from environment variable
+      # Create tag file and build the LaTeX document
+      - name: "Create tag file"
+        run: |
+          echo "${{ github.event.inputs.tag }}" > paper/repo_tag.tex
+
       - name: "Build the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
         with:
           paper: paper/document.tex
-        env:
-          REPO_TAG: ${{ github.event.inputs.tag }}
+
+      - name: "Clean up tag file"
+        run: |
+          rm -f paper/repo_tag.tex
 
   release:
     runs-on: ubuntu-latest
