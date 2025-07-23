@@ -70,9 +70,9 @@ runs:
           dir=$(dirname "$doc")
           local file
           file=$(basename "$doc")
-        
+
           echo "Compiling $doc from $dir"
-        
+
           pushd "$dir" > /dev/null
           if ! ../../tectonic "$file" --outdir "../../${{ env.BUILD_DIR }}" --keep-logs; then
             echo "Error compiling $doc - check logs"
@@ -80,11 +80,11 @@ runs:
             return 1
           fi
           popd > /dev/null
-        
+
           cp ${{ env.BUILD_DIR }}/*.pdf ${{ inputs.output-folder }}/
           echo "Successfully compiled $doc"
         }
-  
+
         for f in ${{ inputs.paper }}; do
           compile_doc "$f" || exit 1
         done
