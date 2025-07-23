@@ -1,0 +1,21 @@
+# Workflow to build and publish LaTeX documents
+# This workflow runs automatically on every push to the repository
+
+name: LATEX
+
+on:
+  push  # Trigger on push events
+
+# Permissions needed for the workflow
+permissions:
+  contents: write  # Allows the workflow to write to the repository (for draft branch)
+
+jobs:
+  # Job to build and publish the LaTeX document
+  latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build and publish the LaTeX document"
+        uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
+        with:
+          paper: paper/document.tex  # Path to the LaTeX document to build
