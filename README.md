@@ -8,7 +8,11 @@
 
 ## 📝 Abstract
 
-This project provides a LaTeX template for academic papers with automated build and release processes. It features customizable headers, environment variable integration, and GitHub Actions workflows for continuous integration.
+This project provides a comprehensive LaTeX template for academic 
+papers with automated build and release processes. 
+It features customizable headers, environment variable integration, 
+GitHub Actions workflows for continuous integration, and a streamlined
+development workflow using Tectonic for reliable LaTeX compilation.
 
 ## 🔗 Link to a companion Python package
 
@@ -27,7 +31,8 @@ Update this README with your project-specific information:
 
 ### **✏️ Edit the LaTeX document**
 
-The main LaTeX file is `paper/document.tex`. Edit this file to add your content.
+The main LaTeX file is `paper/document.tex`. 
+Edit this file to add your content.
 We use [tectonic](https://github.com/tectonic-typesetting/tectonic)
 to compile LaTeX files. The resulting PDF documents are automatically released
 to the [draft branch](https://github.com/tschm/ppp1/tree/draft)
@@ -35,24 +40,10 @@ of the repository.
 
 ### **🏷️ Repository Tags**
 
-The document can display a repository tag in the header.
-This tag is read from the `REPO_TAG` environment variable during compilation:
+The document can display metadata in the header.
 
-- When building locally: Set the `REPO_TAG` environment variable
-before running `make compile`
-
-  ```bash
-  REPO_TAG="v1.0.0" make compile
-  ```
-
-- In GitHub Actions: The tag is automatically set from the workflow
-input during releases
-
-If the `REPO_TAG` environment variable is not set, no tag will
-be displayed in the document header.
-
-Additionally, if a file named `header_text.txt` exists in the paper directory,
-its contents will be included in the header. This allows you to add custom text
+Both in latex.yml and release.yml we create a file `header.txt` 
+where we extract the sha or the current tag. This allows you to add custom text
 to the header without modifying the LaTeX code.
 
 ### **🔍 Viewing Your Document**

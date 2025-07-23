@@ -15,6 +15,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create header.txt
+        working-directory: paper
+        run: |
+          touch header.txt
+          SHA=$(git describe --tags --dirty --always)
+          echo "Repo: ${{ github.repository }}, Version: $SHA" >> header.txt
+
+          # display the header.txt file
+          cat header.txt
+
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@main
         with:
