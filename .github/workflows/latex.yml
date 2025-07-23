@@ -15,6 +15,22 @@ jobs:
   latex:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4  # Check out the repository code
+
+
+      - name: Create header.txt
+        run: |
+          touch paper/header.txt
+
+          echo "Repo: ${{ github.repository }}\n" >> paper/header.txt
+          echo "Version: $(git describe --tags --always --dirty)\n" >> paper/header.txt
+          #echo "Version: ${{ github.event.inputs.tag }}\n" >> paper/header.txt
+          echo "Date: $(date '+%d %B %Y')\n" >> paper/header.txt
+
+          # display the header.txt file
+          cat paper/header.txt
+
       - name: "Build and publish the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
         with:
