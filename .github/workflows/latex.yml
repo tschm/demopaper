@@ -37,9 +37,9 @@ jobs:
       - name: Compile LaTeX document
         working-directory: paper
         run: |
-          mkdir -p ../compiled
+          mkdir -p compiled
           cat header.txt
-          ./tectonic document.tex --outdir ../compiled
+          ./tectonic document.tex --outdir compiled
           
           tree compiled
 
