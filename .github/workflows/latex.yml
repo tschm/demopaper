@@ -31,6 +31,6 @@ jobs:
           cat paper/header.txt
 
       - name: "Build and publish the LaTeX document"
-        uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
+        uses: tschm/cradle/actions/latex@v0.3.04  # Custom action to build LaTeX documents
         with:
           paper: paper/document.tex  # Path to the LaTeX document to build
