@@ -17,6 +17,7 @@ jobs:
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
           ./tectonic --version
+          ./biber --version
 
       - name: Create header.txt
         working-directory: paper
