@@ -12,12 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install biber
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y biber
-          echo "Installed Biber:"
-          biber --version
+      #- name: Install biber
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install -y biber
+      #    echo "Installed Biber:"
+      #    biber --version
 
       - name: Install Tectonic
         working-directory: paper
@@ -43,3 +43,12 @@ jobs:
         with:
           name: compiled-pdf
           path: paper/compiled/document.pdf
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: "draft"
+          folder: paper/compiled
+          commit-message: "Compiled paper"
+          clean: true
+          single-commit: false
