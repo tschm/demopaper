@@ -1,2 +1,0 @@
-Version: 1da98ad
-Date: 23 July 2025
