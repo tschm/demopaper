@@ -20,9 +20,12 @@
 \renewcommand{\headrulewidth}{0.4pt} % line under header
 
 % Conditionally include header.txt
-\IfFileExists{header.txt}{%
-\fancyhead[L]{\parbox{\textwidth}{\ttfamily\small\input{header.txt}}}
-}{}
+\fancyhead[L]{%
+  \parbox[t]{0.5\textwidth}{%
+    \raggedright\ttfamily\small
+    \input{header.txt}%
+  }%
+}
 
 % Setup fancy headers
 %\pagestyle{fancy}
