@@ -39,7 +39,14 @@ jobs:
         run: |
           mkdir -p compiled
           cat header.txt
-          ./tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
+          ./tectonic document.tex --outdir compiled
+          
+          tree compiled
+
+      #- name: Copy compiled documents
+      #  run: |
+      #    mkdir -p compiled
+      #    cp -r paper/compiled/*.pdf compiled
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
@@ -51,7 +58,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: "draft"
-          folder: paper/**/*.pdf
+          folder: paper/compiled
           commit-message: "Compiled paper"
           clean: true
           single-commit: false
