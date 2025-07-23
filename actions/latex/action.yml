@@ -74,7 +74,7 @@ runs:
           echo "Compiling $doc from $dir"
 
           pushd "$dir" > /dev/null
-          if ! ../../tectonic "$file" --outdir "../../${{ env.BUILD_DIR }}" --keep-logs; then
+          if ! ../tectonic "$file" --outdir "../${{ env.BUILD_DIR }}" --keep-logs; then
             echo "Error compiling $doc - check logs"
             popd > /dev/null
             return 1
