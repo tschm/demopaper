@@ -23,9 +23,9 @@ jobs:
         run: |
           touch header.txt
 
-          echo "Repo: ${{ github.repository }}\n" >> header.txt
-          echo "Version: ${{ github.event.inputs.tag }}\n" >> header.txt
-          echo "Date: $(date '+%d %B %Y')\n" >> header.txt
+          echo "Repo: ${{ github.repository }}" >> header.txt
+          echo "Version: ${{ github.event.inputs.tag }}" >> header.txt
+          echo "Date: $(date '+%d %B %Y')" >> header.txt
 
           # display the header.txt file
           cat header.txt
@@ -34,6 +34,7 @@ jobs:
         working-directory: paper
         run: |
           mkdir -p compiled
+          cat header.txt
           ./tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
 
       - name: Upload PDF artifact
