@@ -44,12 +44,12 @@ jobs:
       - name: Create header.txt
         run: |
           touch paper/header.txt
-          
+
           echo "Repo: ${{ github.repository }}\n" >> paper/header.txt
           #echo "Version: $(git describe --tags --always --dirty)" >> paper/header.txt
           echo "Version: ${{ github.event.inputs.tag }}\n" >> paper/header.txt
           echo "Date: $(date '+%d %B %Y')\n" >> paper/header.txt
-          
+
           # display the header.txt file
           cat paper/header.txt
 
