@@ -70,13 +70,13 @@ To set up the development environment:
    ```
 
 2. **Compile the document**:
-   
+
   ```bash
    make compile
    ```
 
 3. **Clean up generated files**:
-   
+
   ```bash
    make clean
    ```
