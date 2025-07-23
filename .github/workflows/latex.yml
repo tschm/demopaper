@@ -1,7 +1,21 @@
 name: Build LaTeX PDF
 
 on:
-  push
+  push:
+  workflow_dispatch:
+    inputs:
+      target-branch:
+        description: "Branch to deploy compiled PDF to"
+        required: true
+        default: "draft"
+      tex-folder:
+        description: "Folder containing the LaTeX file"
+        required: true
+        default: "paper"
+      tex-file:
+        description: "Main LaTeX file to compile (e.g. document.tex)"
+        required: true
+        default: "document.tex"
 
 permissions:
   contents: write
@@ -11,36 +25,34 @@ jobs:
     runs-on: ubuntu-latest
     name: Compile LaTeX with Tectonic
 
+    env:
+      TEX_FOLDER: ${{ github.event.inputs.tex-folder || 'paper' }}
+      TEX_FILE: ${{ github.event.inputs.tex-file || 'document.tex' }}
+      TARGET_BRANCH: ${{ github.event.inputs.target-branch || 'draft' }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Tectonic
-        working-directory: paper
+        working-directory: ${{ env.TEX_FOLDER }}
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-          echo "Installed Tectonic:"
           ./tectonic --version
 
       - name: Compile LaTeX document
-        working-directory: paper
+        working-directory: ${{ env.TEX_FOLDER }}
         run: |
           mkdir -p compiled
-          ./tectonic document.tex --outdir compiled
+          echo "Compiling $TEX_FILE"
+          ./tectonic "$TEX_FILE" --outdir compiled
           tree compiled
-
-
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: compiled-pdf
-          path: paper/compiled/document.pdf
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: "draft"
-          folder: paper/compiled
-          commit-message: "Compiled paper"
+          branch: ${{ env.TARGET_BRANCH }}
+          folder: ${{ env.TEX_FOLDER }}/compiled
+          commit-message: "Compiled PDF from ${{ env.TEX_FOLDER }}/${{ env.TEX_FILE }}"
           clean: true
           single-commit: false
