@@ -45,7 +45,7 @@ jobs:
       - name: "Create tag file"
         run: |
           echo ${{ github.event.inputs.tag }} > paper/header.txt
-          ls paper
+          cat paper/header.txt
 
       - name: "Build the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.3.04  # Custom action to build LaTeX documents
