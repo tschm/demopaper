@@ -23,13 +23,6 @@ jobs:
         run: |
           touch header.txt
 
-          echo "Repo: ${{ github.repository }}" >> header.txt
-          echo "Version: ${{ github.event.inputs.tag }}" >> header.txt
-          echo "Date: $(date '+%d %B %Y')" >> header.txt
-
-          # display the header.txt file
-          cat header.txt
-
       - name: Compile LaTeX document
         working-directory: paper
         run: |
