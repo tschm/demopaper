@@ -12,14 +12,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Tectonic and Biber
+      - name: Install biber
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y biber
+          echo "Installed Biber:"
+          biber --version
+
+      - name: Install Tectonic
         working-directory: paper
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
           echo "Installed Tectonic:"
           ./tectonic --version
-          echo "Installed Biber:"
-          ./biber --version
 
       - name: Create header.txt
         working-directory: paper
