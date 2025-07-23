@@ -12,12 +12,24 @@
 \definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
 \definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
 
-% Setup fancy headers
 \pagestyle{fancy}
-\fancyhf{} % Clear all header and footer fields
-\fancyhead[R]{\textcolor{blue}{\InputIfFileExists{header.txt}{}{}}} % Add tag to the right header in blue
-%\fancyhead[R]{\textcolor{blue}{Hello World}}
-\renewcommand{\headrulewidth}{0pt} % Remove header rule
+\fancyhf{}  % clear all headers and footers
+
+% Make the header file monospace and smaller (optional)
+\usepackage{fancyvrb}
+\renewcommand{\headrulewidth}{0.4pt} % line under header
+
+% Conditionally include header.txt
+\IfFileExists{header.txt}{%
+  \fancyhead[L]{\input{header.txt}}%
+}{}
+
+% Setup fancy headers
+%\pagestyle{fancy}
+%\fancyhf{} % Clear all header and footer fields
+%\fancyhead[R]{\textcolor{blue}{\input{header.txt}{}{}}} % Add tag to the right header in blue
+%%\fancyhead[R]{\textcolor{blue}{Hello World}}
+%\renewcommand{\headrulewidth}{0pt} % Remove header rule
 
 \lstset{
   language=Python,
@@ -39,7 +51,7 @@
 
 \begin{document}
 \maketitle
-\thispagestyle{fancy}
+%\thispagestyle{fancy}
 
 \begin{abstract}
     Hello Tag: \InputIfFileExists{header.txt}{}{}
