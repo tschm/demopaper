@@ -64,22 +64,27 @@ runs:
       run: |
         echo "Starting compilation at $(date)"
 
-        # Function to compile a single document
         compile_doc() {
           local doc="$1"
-          echo "Compiling $doc"
-
-          # First pass
-          if ! ./tectonic "$doc" --outdir ${{ env.BUILD_DIR }} --keep-logs; then
+          local dir
+          dir=$(dirname "$doc")
+          local file
+          file=$(basename "$doc")
+        
+          echo "Compiling $doc from $dir"
+        
+          pushd "$dir" > /dev/null
+          if ! ../../tectonic "$file" --outdir "../../${{ env.BUILD_DIR }}" --keep-logs; then
             echo "Error compiling $doc - check logs"
+            popd > /dev/null
             return 1
           fi
-
-          # Copy final PDF to publish directory
+          popd > /dev/null
+        
           cp ${{ env.BUILD_DIR }}/*.pdf ${{ inputs.output-folder }}/
           echo "Successfully compiled $doc"
         }
-
+  
         for f in ${{ inputs.paper }}; do
           compile_doc "$f" || exit 1
         done
