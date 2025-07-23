@@ -31,6 +31,19 @@ to compile your files. The resulting pdf documents are released
 to the [draft branch](https://github.com/tschm/ppp1/tree/draft)
 of the repo.
 
+### **🏷️ Repository Tags**
+
+The document can display a repository tag in the header. This tag is read from the `REPO_TAG` environment variable during compilation:
+
+- When building locally: Set the `REPO_TAG` environment variable before running `make compile`
+  ```bash
+  REPO_TAG="v1.0.0" make compile
+  ```
+
+- In GitHub Actions: The tag is automatically set from the workflow input during releases
+
+If the `REPO_TAG` environment variable is not set, no tag will be displayed in the document header.
+
 ### **🔍 Click on the header of your README.md file**
 
 The header links to your compiled document.

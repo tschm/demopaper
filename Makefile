@@ -23,7 +23,13 @@ help:  ## Display this help screen
 # Mark 'compile' as a phony target
 .PHONY: compile
 compile: ## Compile document(s)
-	@./tectonic paper/document.tex  # Compile the LaTeX document using tectonic
+	@if [ -n "$(REPO_TAG)" ]; then \
+		export REPO_TAG="$(REPO_TAG)"; \
+		./tectonic paper/document.tex; \
+		unset REPO_TAG; \
+	else \
+		./tectonic paper/document.tex; \
+	fi
 
 
 # Mark 'clean' as a phony target

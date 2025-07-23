@@ -41,18 +41,13 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      # Add the tag to the LaTeX document
-      - name: "Add tag to LaTeX document"
-        run: |
-          # Create a LaTeX command file that defines the tag
-          echo "\\renewcommand{\\repotag}{${{ github.event.inputs.tag }}}" > paper/tag.tex
-          # Include the tag file in the document
-          sed -i '/\\newcommand{\\repotag}{}/a \\input{tag.tex}' paper/document.tex
-
+      # Build the LaTeX document with tag from environment variable
       - name: "Build the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
         with:
           paper: paper/document.tex
+        env:
+          REPO_TAG: ${{ github.event.inputs.tag }}
 
   release:
     runs-on: ubuntu-latest

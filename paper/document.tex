@@ -4,6 +4,7 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{fancyhdr}    % For custom headers and footers
+\usepackage{catchfile}    % For reading environment variables
 %\usepackage{amsmath}
 
 % Define custom colors for better contrast
@@ -12,8 +13,11 @@
 \definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
 \definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
 
-% Define a command for the repository tag (default is empty)
-\newcommand{\repotag}{}
+% Define a command for the repository tag from environment variable
+\newcommand{\repotag}{%
+  \CatchFileEdef{\repotagval}{|kpsewhich --var-value=REPO_TAG}{}%
+  \ifx\repotagval\empty\else\repotagval\fi%
+}
 
 % Setup fancy headers
 \pagestyle{fancy}
