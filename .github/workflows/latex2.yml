@@ -13,29 +13,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Tectonic
+        working-directory: paper
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
           ./tectonic --version
 
       - name: Create header.txt
+        working-directory: paper
         run: |
-          touch paper/header.txt
+          touch header.txt
 
-          echo "Repo: ${{ github.repository }}\n" >> paper/header.txt
-          echo "Version: ${{ github.event.inputs.tag }}\n" >> paper/header.txt
-          echo "Date: $(date '+%d %B %Y')\n" >> paper/header.txt
+          echo "Repo: ${{ github.repository }}\n" >> header.txt
+          echo "Version: ${{ github.event.inputs.tag }}\n" >> header.txt
+          echo "Date: $(date '+%d %B %Y')\n" >> header.txt
 
           # display the header.txt file
-          cat paper/header.txt
+          cat header.txt
 
       - name: Compile LaTeX document
         working-directory: paper
         run: |
-          mkdir -p ../compiled
-          ../tectonic document.tex --outdir ../compiled --keep-logs --keep-intermediates
+          mkdir -p compiled
+          tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: compiled-pdf
-          path: compiled/document.pdf
+          path: paper/compiled/document.pdf
