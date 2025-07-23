@@ -38,6 +38,17 @@ jobs:
   latex:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4  # Check out the repository code
+
+      # Add the tag to the LaTeX document
+      - name: "Add tag to LaTeX document"
+        run: |
+          # Create a LaTeX command file that defines the tag
+          echo "\\renewcommand{\\repotag}{${{ github.event.inputs.tag }}}" > paper/tag.tex
+          # Include the tag file in the document
+          sed -i '/\\begin{document}/i \\input{tag.tex}' paper/document.tex
+
       - name: "Build the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
         with:

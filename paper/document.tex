@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{fancyhdr}    % For custom headers and footers
 %\usepackage{amsmath}
 
 % Define custom colors for better contrast
@@ -10,6 +11,15 @@
 \definecolor{mygreen}{rgb}{0.0, 0.5, 0.2}  % Darker green
 \definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
 \definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
+
+% Define a command for the repository tag (default is empty)
+\newcommand{\repotag}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[R]{\textcolor{myblue}{\repotag}} % Add tag to the right header in blue
+\renewcommand{\headrulewidth}{0pt} % Remove header rule
 
 \lstset{
   language=Python,
