@@ -47,7 +47,7 @@ jobs:
           # Create a LaTeX command file that defines the tag
           echo "\\renewcommand{\\repotag}{${{ github.event.inputs.tag }}}" > paper/tag.tex
           # Include the tag file in the document
-          sed -i '/\\begin{document}/i \\input{tag.tex}' paper/document.tex
+          sed -i '/\\newcommand{\\repotag}{}/a \\input{tag.tex}' paper/document.tex
 
       - name: "Build the LaTeX document"
         uses: tschm/cradle/actions/latex@v0.2.1  # Custom action to build LaTeX documents
