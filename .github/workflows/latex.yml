@@ -12,11 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Tectonic
+      - name: Install Tectonic and Biber
         working-directory: paper
         run: |
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+          echo "Installed Tectonic:"
           ./tectonic --version
+          echo "Installed Biber:"
           ./biber --version
 
       - name: Create header.txt
