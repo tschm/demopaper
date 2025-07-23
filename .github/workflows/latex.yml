@@ -52,13 +52,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compiled-pdf
-          path: compiled/document.pdf
+          path: paper/compiled/document.pdf
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: "draft"
-          folder: compiled
+          folder: paper/compiled
           commit-message: "Compiled paper"
           clean: true
           single-commit: false
