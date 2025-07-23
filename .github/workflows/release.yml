@@ -52,7 +52,7 @@ jobs:
         run: |
           touch header.txt
           echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" >> header.txt
-          
+
           # display the header.txt file
           cat header.txt
 
