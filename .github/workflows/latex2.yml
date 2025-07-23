@@ -34,7 +34,7 @@ jobs:
         working-directory: paper
         run: |
           mkdir -p compiled
-          tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
+          ./tectonic document.tex --outdir compiled --keep-logs --keep-intermediates
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
