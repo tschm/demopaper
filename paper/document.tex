@@ -21,7 +21,7 @@
 
 % Conditionally include header.txt
 \IfFileExists{header.txt}{%
-  \fancyhead[L]{\input{header.txt}}%
+\fancyhead[L]{\parbox{\textwidth}{\ttfamily\small\input{header.txt}}}
 }{}
 
 % Setup fancy headers
