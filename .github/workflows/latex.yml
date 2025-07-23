@@ -15,13 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      #- name: Install biber
-      #  run: |
-      #    sudo apt-get update
-      #    sudo apt-get install -y biber
-      #    echo "Installed Biber:"
-      #    biber --version
-
       - name: Install Tectonic
         working-directory: paper
         run: |
@@ -29,24 +22,13 @@ jobs:
           echo "Installed Tectonic:"
           ./tectonic --version
 
-      - name: Create header.txt
-        working-directory: paper
-        run: |
-          touch header.txt
-
       - name: Compile LaTeX document
         working-directory: paper
         run: |
           mkdir -p compiled
-          cat header.txt
           ./tectonic document.tex --outdir compiled
-          
           tree compiled
 
-      #- name: Copy compiled documents
-      #  run: |
-      #    mkdir -p compiled
-      #    cp -r paper/compiled/*.pdf compiled
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
