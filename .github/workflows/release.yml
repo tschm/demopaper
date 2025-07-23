@@ -51,11 +51,8 @@ jobs:
         working-directory: paper
         run: |
           touch header.txt
-
-          echo "Repo: ${{ github.repository }}/n" >> header.txt
-          echo "Version: ${{ github.event.inputs.tag }}/n" >> header.txt
-          echo "Date: $(date '+%d %B %Y')/n" >> header.txt
-
+          echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" >> header.txt
+          
           # display the header.txt file
           cat header.txt
 
