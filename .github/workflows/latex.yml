@@ -19,7 +19,7 @@ jobs:
         working-directory: paper
         run: |
           rm -f header.txt
-          SHA=$(git describe --tags --dirty --always || git rev-parse --short HEAD)
+          SHA=$(git describe || git rev-parse --short HEAD)
           echo "Repo: ${{ github.repository }}, Version: $SHA" > header.txt
 
           # display the header.txt file
