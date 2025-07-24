@@ -20,7 +20,7 @@ jobs:
       - name: Create header.txt
         working-directory: paper
         run: |
-          rm -f header.txt
+          rm -f header.tex
           
           SHA=$(git rev-parse --short HEAD)
           # Get current branch name
@@ -31,7 +31,7 @@ jobs:
           echo "\\texttt{Repo: $REPO, Branch: $BRANCH, Version: $SHA}" > header.tex
                                                                   
           # display the header.txt file
-          cat header.txt
+          cat header.tex
 
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@main
