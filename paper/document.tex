@@ -4,6 +4,7 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{fancyhdr}    % For custom headers and footers
+\usepackage{verbatim}    % To parse header.txt
 
 % Define custom colors for better contrast
 \definecolor{myblue}{rgb}{0.1, 0.2, 0.7}  % Darker blue
@@ -22,7 +23,7 @@
 \fancyhead[L]{%
   \parbox[t]{0.5\textwidth}{%
     \raggedright\ttfamily\small
-    \textcolor{blue}{\input{header.txt}}%
+    \textcolor{blue}{\verbatiminput{header.txt}}%
   }%
 }
 
