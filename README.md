@@ -156,8 +156,9 @@ This means:
 1. Regular commits to your repository will not automatically update the published document
 2. To update the published document, you need to create a new release with a tag
 3. You can create a new release by:
-   - Going to the "Releases" section in your GitHub repository
-   - Clicking "Create a new release"
+   - Going to the "Actions" section in your GitHub repository
+   - Clicking "Build and Release"
+   - Clicking on "Run workflow" 
    - Entering a tag version (e.g., v1.0.0, v1.0.1)
    - Publishing the release
 
