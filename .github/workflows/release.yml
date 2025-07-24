@@ -81,7 +81,7 @@ jobs:
           cat header.tex
 
       - name: Compile LaTeX
-        uses: tschm/cradle/actions/latex@0.3.06
+        uses: tschm/cradle/actions/latex@v0.3.06
         with:
           tex-file: document.tex
           tex-folder: paper
