@@ -23,14 +23,13 @@ jobs:
           rm -f header.tex
           
           SHA=$(git rev-parse --short HEAD)
-          # Get current branch name
           BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          REPO=$(basename -s .git `git config --get remote.origin.url`)
           
-          # Write to header.txt
           # Write header.tex directly with LaTeX-safe wrapper
           echo "\\texttt{Repo: $REPO, Branch: $BRANCH, Version: $SHA}" > header.tex
                                                                   
-          # display the header.txt file
+          # display the header.tex file
           cat header.tex
 
       - name: Compile LateX
