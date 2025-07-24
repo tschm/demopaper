@@ -18,8 +18,8 @@ jobs:
       - name: Create header.txt
         working-directory: paper
         run: |
-          rm header.txt
-          SHA=$(git describe --tags --dirty --always)
+          rm -f header.txt
+          SHA=$(git describe --tags --dirty --always || git rev-parse --short HEAD)
           echo "Repo: ${{ github.repository }}, Version: $SHA" > header.txt
 
           # display the header.txt file
@@ -35,3 +35,9 @@ jobs:
       - name: Check folder with compiled document
         run: |
           ls paper/compiled
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/compiled/*.pdf
