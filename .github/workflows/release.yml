@@ -96,8 +96,6 @@ jobs:
       # This automatically retrieves artifacts uploaded by jobs specified in the 'needs' field
       - name: Download all artifacts
         uses: actions/download-artifact@v4  # Official GitHub artifact download action
-        with:
-          path: latex  # Directory where artifacts will be downloaded
 
       - name: Display artifacts
         run: |
@@ -112,7 +110,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
           tag_name: ${{ github.event.inputs.tag }}  # Use the provided tag
           generate_release_notes: true  # Automatically generate notes from commits
-          files: latex/**/*.pdf
+          files: latex/*.pdf
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -120,7 +118,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload entire folder
           path: 'latex'
 
       - name: Deploy to GitHub Pages
