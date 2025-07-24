@@ -21,14 +21,14 @@ jobs:
         working-directory: paper
         run: |
           rm -f header.tex
-          
+
           SHA=$(git rev-parse --short HEAD)
           BRANCH=$(git rev-parse --abbrev-ref HEAD)
           REPO=$(basename -s .git `git config --get remote.origin.url`)
-          
+
           # Write header.tex directly with LaTeX-safe wrapper
           echo "\\texttt{Repo: $REPO, Branch: $BRANCH, Version: $SHA}" > header.tex
-                                                                  
+
           # display the header.tex file
           cat header.tex
 
