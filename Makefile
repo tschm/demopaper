@@ -21,14 +21,8 @@ help:  ## Display this help screen
 
 # Mark 'compile' as a phony target
 .PHONY: compile
-compile: ## Compile document(s)
-	@if [ -n "$(REPO_TAG)" ]; then \
-		echo "$(REPO_TAG)" > paper/header.txt; \
-		./tectonic paper/document.tex; \
-		rm -f paper/header.txt; \
-	else \
-		./tectonic paper/document.tex; \
-	fi
+compile: install ## Compile document(s)
+	./tectonic paper/document.tex
 
 
 # Mark 'clean' as a phony target
