@@ -60,4 +60,3 @@ jobs:
         with:
           name: latex
           path: paper/compiled/*.pdf
-
