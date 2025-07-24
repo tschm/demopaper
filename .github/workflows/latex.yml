@@ -25,22 +25,22 @@ jobs:
           REPO_NAME=$(basename "${REPO}")
           BRANCH="${GITHUB_REF#refs/heads/}"
           SHA="${GITHUB_SHA:0:7}"
-      
+
           # Escape LaTeX-sensitive characters (mainly underscores)
           escape_latex() {
             echo "$1" | sed -e 's/_/\\_/g'
           }
-      
+
           REPO_ESC=$(escape_latex "$REPO_NAME")
           BRANCH_ESC=$(escape_latex "$BRANCH")
           SHA_ESC=$(escape_latex "$SHA")
-      
+
           # Construct commit URL
           COMMIT_URL="https://github.com/$REPO/commit/${GITHUB_SHA}"
-      
+
           # Output single LaTeX hyperlink line
           echo "\\href{$COMMIT_URL}{\\texttt{Repo: $REPO_ESC, Branch: $BRANCH_ESC, Version: $SHA_ESC}}" > header.tex
-      
+
           cat header.tex
 
       - name: Compile LateX
