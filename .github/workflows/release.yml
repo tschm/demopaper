@@ -54,7 +54,7 @@ jobs:
         working-directory: paper
         run: |
           rm -f header.tex
-          
+
           # Extract values from GitHub-provided environment variables
           REPO="${{ github.repository }}"
           TAG="${{ github.event.inputs.tag }}"
