@@ -47,15 +47,42 @@ jobs:
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
+        with:
+          fetch-depth: '0'
 
-      - name: Create header.txt
+      - name: Create header.tex
         working-directory: paper
         run: |
-          rm -f header.txt
-          echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" > header.txt
+          rm -f header.tex
+          
+          # Extract values from GitHub-provided environment variables
+          REPO="${{ github.repository }}"
+          TAG="${{ github.event.inputs.tag }}"
+          REPO_NAME=$(basename "${REPO}")
 
-          # display the header.txt file
-          cat header.txt
+          # Escape LaTeX-sensitive characters (mainly underscores)
+          escape_latex() {
+            echo "$1" | sed -e 's/_/\\_/g'
+          }
+
+          REPO_ESC=$(escape_latex "$REPO_NAME")
+
+          # Construct commit URL
+          COMMIT_URL="https://github.com/$REPO/tree/${TAG}"
+
+          # Output single LaTeX hyperlink line
+          echo "\\href{$COMMIT_URL}{\\texttt{Repo: $REPO_ESC, TAG: $TAG}}" > header.tex
+
+          cat header.tex
+
+      #- name: Create header.txt
+      #  working-directory: paper
+      #  run: |
+      #    rm -f header.txt
+      #    echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" > header.txt
+      #
+      #    # display the header.txt file
+      #    cat header.txt
 
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@main
@@ -108,23 +135,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
-#  deploy:
-#    environment:
-#      name: github-pages
-#      url: ${{ steps.deployment.outputs.page_url }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      #- name: Checkout
-#      #  uses: actions/checkout@v4
-#      #- name: Setup Pages
-#      #  uses: actions/configure-pages@v5
-#      - name: Upload artifact
-#        uses: actions/upload-pages-artifact@v3
-#        with:
-#          # Upload entire repository
-#          path: '.'
-#      - name: Deploy to GitHub Pages
-#        id: deployment
-#        uses: actions/deploy-pages@v4
