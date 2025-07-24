@@ -158,7 +158,7 @@ This means:
 3. You can create a new release by:
    - Going to the "Actions" section in your GitHub repository
    - Clicking "Build and Release"
-   - Clicking on "Run workflow" 
+   - Clicking on "Run workflow"
    - Entering a tag version (e.g., v1.0.0, v1.0.1)
    - Publishing the release
 
