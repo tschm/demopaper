@@ -104,7 +104,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload the compiled document
-          path: paper/compiled/*.pdf
+          path: paper/compiled
 
       - name: Deploy to GitHub Pages
         id: deployment
