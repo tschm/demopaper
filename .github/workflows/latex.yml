@@ -51,12 +51,8 @@ jobs:
           tex-file: document.tex
           tex-folder: paper
 
-      - name: Check folder with compiled document
-        run: |
-          ls paper/compiled
-
       - name: Upload compiled PDF
         uses: actions/upload-artifact@v4
         with:
-          name: latex
+          name: paper-pdf
           path: paper/compiled/*.pdf
