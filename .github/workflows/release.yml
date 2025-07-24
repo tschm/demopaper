@@ -15,6 +15,13 @@ on:
 permissions:
   contents: write  # Allows the workflow to write to the repository (create tags)
   packages: write  # Allows the workflow to write to GitHub Packages (for Docker images)
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   # Job to set the tag based on input
@@ -44,24 +51,27 @@ jobs:
       - name: Create header.txt
         working-directory: paper
         run: |
-          touch header.txt
-          echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" >> header.txt
+          rm -f header.txt
+          echo "Repo: ${{ github.repository }}, Version: ${{ github.event.inputs.tag }}" > header.txt
 
           # display the header.txt file
           cat header.txt
 
       - name: Compile LateX
-        uses: tschm/cradle/actions/latex@v0.3.05
+        uses: tschm/cradle/actions/latex@main
         with:
           tex-file: document.tex
           tex-folder: paper
-          target-branch: draft
 
   release:
     runs-on: ubuntu-latest
     needs:
       - latex
       - tagging
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       # Download all artifacts from previous jobs
@@ -85,3 +95,36 @@ jobs:
           tag_name: ${{ github.event.inputs.tag }}  # Use the provided tag
           generate_release_notes: true  # Automatically generate notes from commits
           files: latex/**/*.pdf
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: 'latex'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+#  deploy:
+#    environment:
+#      name: github-pages
+#      url: ${{ steps.deployment.outputs.page_url }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      #- name: Checkout
+#      #  uses: actions/checkout@v4
+#      #- name: Setup Pages
+#      #  uses: actions/configure-pages@v5
+#      - name: Upload artifact
+#        uses: actions/upload-pages-artifact@v3
+#        with:
+#          # Upload entire repository
+#          path: '.'
+#      - name: Deploy to GitHub Pages
+#        id: deployment
+#        uses: actions/deploy-pages@v4
