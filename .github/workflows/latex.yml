@@ -31,3 +31,7 @@ jobs:
           tex-file: document.tex
           tex-folder: paper
           #target-branch: draft
+
+      - name: Check folder with compiled document
+        run: |
+          ls paper/compiled
