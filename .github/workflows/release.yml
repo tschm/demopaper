@@ -14,7 +14,7 @@ on:
 # Permissions needed for the workflow
 permissions:
   contents: write  # Allows the workflow to write to the repository (create tags)
-  packages: write  # Allows the workflow to write to GitHub Packages (for Docker images)
+  pages: write
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
