@@ -150,7 +150,7 @@ of your document without having to download the PDF file.
 
 #### **Important Note on GitHub Pages Updates**
 
-GitHub Pages are **only updated when a new tag is established**. 
+GitHub Pages are **only updated when a new tag is established**.
 This means:
 
 1. Regular commits to your repository will not automatically update the published document
