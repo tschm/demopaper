@@ -12,10 +12,10 @@
 \definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
 \definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
 
-\newread\headerfile
-\openin\headerfile=header.txt
-\read\headerfile to \headervalue
-\closein\headerfile
+%\newread\headerfile
+%\openin\headerfile=header.txt
+%\read\headerfile to \headervalue
+%\closein\headerfile
 
 \pagestyle{fancy}
 \fancyhf{}  % clear all headers and footers
@@ -27,7 +27,7 @@
 % Conditionally include header.txt
 \fancyhead[L]{%
   \parbox[t]{0.5\textwidth}{%
-    \raggedright\ttfamily\small\textcolor{blue}{\headervalue}%
+    \raggedright\ttfamily\small\textcolor{blue}{\input{header.tex}}%
   }%
 }
 
