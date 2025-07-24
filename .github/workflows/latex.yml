@@ -50,7 +50,6 @@ jobs:
         with:
           tex-file: document.tex
           tex-folder: paper
-          #target-branch: draft
 
       - name: Check folder with compiled document
         run: |
@@ -59,5 +58,6 @@ jobs:
       - name: Upload compiled PDF
         uses: actions/upload-artifact@v4
         with:
-          name: paper-pdf
+          name: latex
           path: paper/compiled/*.pdf
+

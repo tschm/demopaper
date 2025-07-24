@@ -145,8 +145,23 @@ this empty file ensures that the document compiles without errors if you don't p
 
 The title at the top of this README (marked with 📄)
 links to your compiled document on GitHub Pages.
-This provides an easy way to access the latest version
+This provides an easy way to access the latest tagged version
 of your document without having to download the PDF file.
+
+#### **Important Note on GitHub Pages Updates**
+
+GitHub Pages are **only updated when a new tag is established**. This means:
+
+1. Regular commits to your repository will not automatically update the published document
+2. To update the published document, you need to create a new release with a tag
+3. You can create a new release by:
+   - Going to the "Releases" section in your GitHub repository
+   - Clicking "Create a new release"
+   - Entering a tag version (e.g., v1.0.0, v1.0.1)
+   - Publishing the release
+
+This workflow ensures that only properly tagged versions of your document are published,
+making it easier to track which version is currently available to readers.
 
 ### **⚙️ Installation and Setup**
 

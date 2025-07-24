@@ -44,6 +44,12 @@ jobs:
   # Job to build and publish LaTeX document
   latex:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
@@ -81,27 +87,6 @@ jobs:
           tex-file: document.tex
           tex-folder: paper
 
-  release:
-    runs-on: ubuntu-latest
-    needs:
-      - latex
-      - tagging
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      # Download all artifacts from previous jobs
-      # This automatically retrieves artifacts uploaded by jobs specified in the 'needs' field
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4  # Official GitHub artifact download action
-
-      - name: Display artifacts
-        run: |
-          ls -all
-          tree latex
-
       # Create a GitHub release for the tag
       # This creates a release on GitHub with automatically generated release notes
       - name: Create GitHub release
@@ -110,7 +95,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
           tag_name: ${{ github.event.inputs.tag }}  # Use the provided tag
           generate_release_notes: true  # Automatically generate notes from commits
-          files: latex/*.pdf
+          files: paper/compiled/*.pdf
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -118,8 +103,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire folder
-          path: 'latex'
+          # Upload the compiled document
+          path: paper/compiled/*.pdf
 
       - name: Deploy to GitHub Pages
         id: deployment
