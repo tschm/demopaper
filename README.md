@@ -144,13 +144,14 @@ this empty file ensures that the document compiles without errors if you don't p
 ### **🔍 Viewing Your Document**
 
 The title at the top of this README (marked with 📄)
-links to your compiled document on GitHub Pages.
-This provides an easy way to access the latest tagged version
+links to the compiled document on GitHub Pages.
+This provides an easy way to access a version
 of your document without having to download the PDF file.
 
 #### **Important Note on GitHub Pages Updates**
 
-GitHub Pages are **only updated when a new tag is established**. This means:
+GitHub Pages are **only updated when a new tag is established**. 
+This means:
 
 1. Regular commits to your repository will not automatically update the published document
 2. To update the published document, you need to create a new release with a tag

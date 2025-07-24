@@ -1,0 +1,16 @@
+name: Block Unauthorized Tag Push
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  reject-tag-push:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - name: Prevent manual tag pushes
+        run: |
+          echo "🚫 Do not push tags directly. Use the manual Build and Release workflow."
+          exit 1
