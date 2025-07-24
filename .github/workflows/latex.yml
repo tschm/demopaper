@@ -27,7 +27,7 @@ jobs:
           REPO=$(basename -s .git `git config --get remote.origin.url`)
 
           # Write header.tex directly with LaTeX-safe wrapper
-          echo "\\texttt{Repo: $REPO, Branch: $BRANCH, Version: $SHA}" > header.tex
+          echo "\\texttt{Repo:$REPO, Branch:$BRANCH, Version:$SHA}" > header.tex
 
           # display the header.tex file
           cat header.tex
