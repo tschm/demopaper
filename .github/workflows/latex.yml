@@ -20,8 +20,8 @@ jobs:
       - name: Run make_header.sh
         run: |
           ./.github/scripts/make_header.sh
-          #cp ./.github/scripts/header.tex paper/header.tex
-          #cat paper/header.tex
+          cp ./.github/scripts/header.tex paper/header.tex
+          cat paper/header.tex
 
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@v0.3.06

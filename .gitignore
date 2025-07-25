@@ -3,6 +3,7 @@
 
 tectonic
 document.pdf
+.github/scripts/header.tex
 
 ### VisualStudioCode ###
 .vscode/*
