@@ -18,7 +18,7 @@ jobs:
           fetch-depth: '0'
 
       - name: Run make_header.sh
-        working-directory: .github/script
+        working-directory: ./.github/script
         run: |
           ./make_header.sh
           cat header.tex
