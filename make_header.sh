@@ -54,4 +54,3 @@ cat <<EOF > header.tex
 EOF
 
 echo "[INFO] Successfully wrote Git metadata to header.tex"
-
