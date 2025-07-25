@@ -18,12 +18,11 @@ jobs:
           fetch-depth: '0'
 
       - name: Run make_header.sh
-        working-directory: ./.github/script
         run: |
           ./make_header.sh
           cat header.tex
-          cp header.tex ../../paper/header.tex
-          cat ../../paper/header.tex
+          cp header.tex paper/header.tex
+          cat paper/header.tex
 
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@v0.3.06
