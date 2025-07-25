@@ -19,10 +19,9 @@ jobs:
 
       - name: Run make_header.sh
         run: |
-          chmod +x ./make_header.sh
-          ./make_header.sh
-          cp header2.tex paper/header.tex
-          cat paper/header.tex
+          ./.github/scripts/make_header.sh
+          #cp ./.github/scripts/header.tex paper/header.tex
+          #cat paper/header.tex
 
       - name: Compile LateX
         uses: tschm/cradle/actions/latex@v0.3.06
