@@ -8,7 +8,7 @@ SHA=$(git rev-parse --short HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DATE=$(git log -1 --format=%cd --date=short)
 TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "untagged")
-PROJECT=""
+PROJECT="Some project"
 PROJECT_NR="10"
 AUTHOR="Thomas Schmelzer"
 COMMENT="Confidential"
@@ -59,7 +59,7 @@ cat <<EOF > header.tex
 \\newcommand{\\commitsha}{\\href{$COMMIT_URL}{\\texttt{$SHA}}}
 \\newcommand{\\branchname}{\\texttt{$BRANCH}}
 \\newcommand{\\commitdate}{\\texttt{$DATE}}
-\\newcommand{\\reponame}{\\texttt{$GH_SLUG}}
+\\newcommand{\\reponame}{\\href{$REPO_URL}}{\\texttt{$GH_SLUG}}
 \\newcommand{\\tagname}{\\href{$TAG_URL}{\\texttt{$TAG}}}
 \\newcommand{\\repoauthor}{\\texttt{$AUTHOR}}
 \\newcommand{\\project}{\\texttt{$PROJECT}}
