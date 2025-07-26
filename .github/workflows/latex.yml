@@ -2,13 +2,58 @@ name: Build LaTeX PDF
 
 on:
   push:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: "Directory containing the LaTeX files"
+        required: false
+        type: string
+        default: "paper"
+      tex-file:
+        description: "LaTeX file to compile (without extension)"
+        required: false
+        type: string
+        default: "document.tex"
+    outputs:
+      pdf_path:
+        description: "Path to the compiled PDF files"
+        value: ${{ jobs.build-latex.outputs.pdf_path }}
 
 permissions:
   contents: write
 
 jobs:
   build-latex:
-    uses: ./.github/workflows/latex-build.yml
-    with:
-      working-directory: 'paper'
-      tex-file: 'document.tex'
+    runs-on: ubuntu-latest
+    name: Compile LaTeX Document
+    outputs:
+      pdf_path: "${{ inputs.working-directory }}/compiled"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Run make_header.sh
+        run: |
+          ./make_header.sh
+          cat header.tex
+          cp header.tex ${{ inputs.working-directory }}/header.tex
+          cat ${{ inputs.working-directory }}/header.tex
+
+      - name: Install Tectonic
+        uses: wtfjoke/setup-tectonic@v3
+
+      - name: Compile LaTeX document
+        shell: bash
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          mkdir -p compiled
+          tectonic ${{ inputs.tex-file }} --outdir compiled
+
+      - name: Upload compiled PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-build-artifact
+          path: ${{ inputs.working-directory }}/compiled/*.pdf
