@@ -1,0 +1,22 @@
+name: Linting LaTeX
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install LaTeX tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chktex lacheck texlive-latex-extra
+
+      - name: Lint with chktex
+        run: chktex -q -n1 -n8 paper/document.tex
+
+      - name: Format with latexindent
+        run: latexindent.pl -w paper/document.tex
