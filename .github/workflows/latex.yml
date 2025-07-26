@@ -7,31 +7,5 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: Compile LaTeX with Tectonic
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: '0'
-
-      - name: Run make_header.sh
-        run: |
-          ./make_header.sh
-          cat header.tex
-          cp header.tex paper/header.tex
-          cat paper/header.tex
-
-      - name: Compile LateX
-        uses: tschm/cradle/actions/latex@v0.3.06
-        with:
-          tex-file: document.tex
-          tex-folder: paper
-
-      - name: Upload compiled PDF
-        uses: actions/upload-artifact@v4
-        with:
-          name: paper-pdf
-          path: paper/compiled/*.pdf
+  build-latex:
+    uses: ./.github/workflows/latex-build.yml
