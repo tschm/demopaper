@@ -8,10 +8,6 @@ SHA=$(git rev-parse --short HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DATE=$(git log -1 --format=%cd --date=short)
 TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "untagged")
-PROJECT="Some project"
-PROJECT_NR="10"
-AUTHOR="Thomas Schmelzer"
-COMMENT="Confidential"
 
 
 # Add -dirty if working tree isn't clean
@@ -47,10 +43,6 @@ echo "[INFO] Commit date: $DATE"
 echo "[INFO] Tag: $TAG"
 echo "[INFO] Commit URL: $COMMIT_URL"
 echo "[INFO] Tag URL: $TAG_URL"
-echo "[INFO] Author: $AUTHOR"
-echo "[INFO] Project: $PROJECT"
-echo "[INFO] Project Number: $PROJECT_NR"
-echo "[INFO] Comment: $COMMENT"
 
 # Write LaTeX macros
 cat <<EOF > header.tex
@@ -59,12 +51,8 @@ cat <<EOF > header.tex
 \\newcommand{\\commitsha}{\\href{$COMMIT_URL}{\\texttt{$SHA}}}
 \\newcommand{\\branchname}{\\texttt{$BRANCH}}
 \\newcommand{\\commitdate}{\\texttt{$DATE}}
-\\newcommand{\\reponame}{\\href{$REPO_URL}}{\\texttt{$GH_SLUG}}
+\\newcommand{\\reponame}{\\href{$REPO_URL}{\\texttt{$GH_SLUG}}}
 \\newcommand{\\tagname}{\\href{$TAG_URL}{\\texttt{$TAG}}}
-\\newcommand{\\repoauthor}{\\texttt{$AUTHOR}}
-\\newcommand{\\project}{\\texttt{$PROJECT}}
-\\newcommand{\\projectnr}{\\texttt{$PROJECT_NR}}
-\\newcommand{\\comment}{\\texttt{$COMMENT}}
 EOF
 
 echo "[INFO] Successfully wrote Git metadata to header.tex"
