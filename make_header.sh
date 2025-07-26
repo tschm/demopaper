@@ -61,11 +61,10 @@ cat <<EOF > header.tex
 \\newcommand{\\commitdate}{\\texttt{$DATE}}
 \\newcommand{\\reponame}{\\texttt{$GH_SLUG}}
 \\newcommand{\\tagname}{\\href{$TAG_URL}{\\texttt{$TAG}}}
-\\newcommand{\\author}{\\texttt{$AUTHOR}}
+\\newcommand{\\repoauthor}{\\texttt{$AUTHOR}}
 \\newcommand{\\project}{\\texttt{$PROJECT}}
 \\newcommand{\\projectnr}{\\texttt{$PROJECT_NR}}
 \\newcommand{\\comment}{\\texttt{$COMMENT}}
 EOF
 
 echo "[INFO] Successfully wrote Git metadata to header.tex"
-
