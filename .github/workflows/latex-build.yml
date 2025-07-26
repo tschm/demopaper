@@ -46,7 +46,7 @@ jobs:
         working-directory: ${{ inputs.working-directory }}
         run: |
           mkdir -p compiled
-          tectonic ${{ inputs.tex-file }}.txt --outdir compiled
+          tectonic ${{ inputs.tex-file }} --outdir compiled
 
       - name: Upload compiled PDF as artifact
         uses: actions/upload-artifact@v4
