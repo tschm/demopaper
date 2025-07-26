@@ -4,6 +4,7 @@
 tectonic
 document.pdf
 .github/scripts/header.tex
+sow.txt
 
 ### VisualStudioCode ###
 .vscode/*
