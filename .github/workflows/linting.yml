@@ -9,6 +9,7 @@ permissions:
 jobs:
   lint-latex:
     runs-on: ubuntu-latest
+
     steps:
       - name: Install LaTeX tools
         run: |
@@ -16,4 +17,5 @@ jobs:
           sudo apt-get install -y chktex
 
       - name: Lint with chktex
-        run: chktex -q -n1 -n8 ./paper/document.tex
+        working-directory: paper
+        run: chktex -q -n1 -n8 document.tex
