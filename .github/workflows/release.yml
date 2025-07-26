@@ -8,10 +8,6 @@ on:
         required: true
         type: string
 
-  push:
-    tags:
-      - 'v*'  # Trigger only on tags like v1.2.3
-
 permissions:
   contents: write
   pages: write
@@ -23,7 +19,6 @@ concurrency:
 
 jobs:
   tagging:
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
@@ -51,15 +46,6 @@ jobs:
         with:
           fetch-depth: '0'
 
-      - name: Determine tag name
-        id: tag
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
-          else
-            echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          fi
-
       - name: Run make_header.sh
         run: |
           ./make_header.sh
@@ -77,7 +63,7 @@ jobs:
         uses: softprops/action-gh-release@v2.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ env.TAG }}
+          tag_name: ${{ github.event.inputs.tag }}
           generate_release_notes: true
           files: paper/compiled/*.pdf
 
