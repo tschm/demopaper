@@ -9,7 +9,6 @@
 ## 📋 Table of Contents
 
 - [Abstract](#-abstract)
-- [Link to a companion Python package](#-link-to-a-companion-python-package)
 - [Features](#-features)
 - [Getting started](#-getting-started)
   - [Customize the README.md file](#-customize-the-readmemd-file)
@@ -27,11 +26,6 @@ papers with automated build and release processes.
 It features customizable headers, environment variable integration,
 GitHub Actions workflows for continuous integration, and a streamlined
 development workflow using Tectonic for reliable LaTeX compilation.
-
-## 🔗 Link to a companion Python package
-
-<!-- Update this link to your actual companion package if available -->
-Companion [Python package](https://github.com/tschm)
 
 ## ✨ Features
 
@@ -104,9 +98,6 @@ with this template:
    % Reset page style after \maketitle (which overwrites the fancy style)
    \thispagestyle{fancy}  % Apply fancy style to the first page
    ```
-
-These components ensure that the header is properly displayed
-and that the `header.tex` file is correctly included.
 
 ### **🏷️ Repository Tags and Headers**
 
