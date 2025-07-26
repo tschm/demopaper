@@ -35,6 +35,9 @@ jobs:
   build-latex:
     uses: ./.github/workflows/latex-build.yml
     needs: [tagging]
+    with:
+      working-directory: 'paper'
+      tex-file: 'document.tex'
 
   release-and-deploy:
     runs-on: ubuntu-latest

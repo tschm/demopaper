@@ -2,6 +2,17 @@ name: Build LaTeX Document
 
 on:
   workflow_call:
+    inputs:
+      working-directory:
+        description: "Directory containing the LaTeX files"
+        required: false
+        type: string
+        default: "paper"
+      tex-file:
+        description: "LaTeX file to compile (without extension)"
+        required: false
+        type: string
+        default: "document.tex"
     outputs:
       pdf_path:
         description: "Path to the compiled PDF files"
@@ -12,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Compile LaTeX Document
     outputs:
-      pdf_path: "paper/compiled"
+      pdf_path: "${{ inputs.working-directory }}/compiled"
 
     steps:
       - name: Checkout repository
@@ -24,17 +35,21 @@ jobs:
         run: |
           ./make_header.sh
           cat header.tex
-          cp header.tex paper/header.tex
-          cat paper/header.tex
+          cp header.tex ${{ inputs.working-directory }}/header.tex
+          cat ${{ inputs.working-directory }}/header.tex
 
-      - name: Compile LaTeX
-        uses: tschm/cradle/actions/latex@v0.3.06
-        with:
-          tex-file: document.tex
-          tex-folder: paper
+      - name: Install Tectonic
+        uses: wtfjoke/setup-tectonic@v3
+
+      - name: Compile LaTeX document
+        shell: bash
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          mkdir -p compiled
+          tectonic ${{ inputs.tex-file }}.txt --outdir compiled
 
       - name: Upload compiled PDF as artifact
         uses: actions/upload-artifact@v4
         with:
           name: latex-build-artifact
-          path: paper/compiled/*.pdf
+          path: ${{ inputs.working-directory }}/compiled/*.pdf
