@@ -13,10 +13,7 @@ jobs:
       - name: Install LaTeX tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y chktex lacheck texlive-latex-extra
+          sudo apt-get install -y chktex
 
       - name: Lint with chktex
         run: chktex -q -n1 -n8 paper/document.tex
-
-      - name: Format with latexindent
-        run: latexindent.pl -w paper/document.tex
