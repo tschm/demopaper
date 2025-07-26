@@ -16,7 +16,6 @@ jobs:
 
       - name: Install LaTeX tools
         run: |
-          # sudo apt-get update
           sudo apt-get install -y chktex
 
       - name: Lint with chktex
