@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download compiled PDF
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: latex-build-artifact
           path: ${{ needs.build-latex.outputs.pdf_path }}
