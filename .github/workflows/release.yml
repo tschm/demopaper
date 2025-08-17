@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Create and Push Tag
         run: |
@@ -49,10 +49,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Download compiled PDF
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v4
         with:
           name: latex-build-artifact
           path: ${{ needs.build-latex.outputs.pdf_path }}

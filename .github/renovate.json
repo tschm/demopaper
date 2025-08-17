@@ -3,7 +3,8 @@
     "config:recommended",
     ":enablePreCommit",
     ":dependencyDashboard",
-    ":semanticCommits"
+    ":semanticCommits",
+    ":monthly"
   ],
   "enabledManagers": ["pre-commit", "github-actions"]
 }
