@@ -9,21 +9,21 @@ on:
         type: string
         default: "paper"
       tex-file:
-        description: "LaTeX file to compile (without extension)"
+        description: "LaTeX file to compile (with or without .tex extension)"
         required: false
         type: string
-        default: "document.tex"
-    outputs:
-      pdf_path:
-        description: "Path to the compiled PDF files"
-        value: ${{ jobs.build-latex.outputs.pdf_path }}
+        default: "document"
+    #outputs:
+    #  pdf_path:
+    #    description: "Path to the compiled PDF files"
+    #    value: ${{ jobs.build-latex.outputs.pdf_path }}
 
 jobs:
   build-latex:
     runs-on: ubuntu-latest
     name: Compile LaTeX Document
-    outputs:
-      pdf_path: "${{ inputs.working-directory }}/compiled"
+    #outputs:
+    #  pdf_path: "${{ inputs.working-directory }}/compiled"
 
     steps:
       - name: Checkout repository
@@ -45,11 +45,15 @@ jobs:
         shell: bash
         working-directory: ${{ inputs.working-directory }}
         run: |
-          mkdir -p compiled
-          tectonic ${{ inputs.tex-file }} --outdir compiled
+          # Extract filename without extension if it has one
+          tectonic "${{ inputs.tex-file }}"
+
+          # Store the filename for the next step
+          FILENAME=$(echo "${{ inputs.tex-file }}" | sed 's/\.tex$//')
+          echo "TEX_FILENAME=${FILENAME}" >> $GITHUB_ENV
 
       - name: Upload compiled PDF as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: latex-build-artifact
-          path: ${{ inputs.working-directory }}/compiled/*.pdf
+          name: ${{ env.TEX_FILENAME }}
+          path: ${{ inputs.working-directory }}/${{ env.TEX_FILENAME }}.pdf
