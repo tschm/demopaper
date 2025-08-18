@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build-latex:
-    uses: ./.github/actions/latex-build.yml
+    uses: ./.github/workflows/latex-build.yml
     with:
       working-directory: 'paper'
       tex-file: 'document.tex'
