@@ -33,10 +33,10 @@ jobs:
 
       - name: Run make_header.sh
         run: |
-          ./make_header.sh
-          cat header.tex
-          cp header.tex ${{ inputs.working-directory }}/header.tex
-          cat ${{ inputs.working-directory }}/header.tex
+          # Produce the header.tex file
+          .github/scripts/make_header.sh
+          # Move the header.tex file to the working directory
+          mv header.tex ${{ inputs.working-directory }}/header.tex
 
       - name: Install Tectonic
         uses: wtfjoke/setup-tectonic@v3
