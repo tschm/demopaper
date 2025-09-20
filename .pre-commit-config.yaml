@@ -17,3 +17,6 @@ repos:
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
+
+      - id: check-gitlab-ci
+        args: ["--verbose"]

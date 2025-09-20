@@ -7,6 +7,8 @@ document.pdf
 # Instructions by the client
 sow.txt
 
+.pre-commit
+
 # files for metadata
 header.tex
 !paper/header.tex
