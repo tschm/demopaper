@@ -39,7 +39,7 @@ jobs:
           mv header.tex ${{ inputs.working-directory }}/header.tex
 
       - name: Install Tectonic
-        uses: wtfjoke/setup-tectonic@v3
+        uses: wtfjoke/setup-tectonic@v4
 
       - name: Compile LaTeX document
         shell: bash
