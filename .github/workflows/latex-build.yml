@@ -13,17 +13,11 @@ on:
         required: false
         type: string
         default: "document"
-    #outputs:
-    #  pdf_path:
-    #    description: "Path to the compiled PDF files"
-    #    value: ${{ jobs.build-latex.outputs.pdf_path }}
 
 jobs:
   build-latex:
     runs-on: ubuntu-latest
     name: Compile LaTeX Document
-    #outputs:
-    #  pdf_path: "${{ inputs.working-directory }}/compiled"
 
     steps:
       - name: Checkout repository
@@ -39,7 +33,7 @@ jobs:
           mv header.tex ${{ inputs.working-directory }}/header.tex
 
       - name: Install Tectonic
-        uses: wtfjoke/setup-tectonic@v3
+        uses: wtfjoke/setup-tectonic@v4
 
       - name: Compile LaTeX document
         shell: bash
