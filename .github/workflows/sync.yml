@@ -55,4 +55,3 @@ jobs:
             .editorconfig
             .pre-commit-config.yaml
             Makefile
-          delete-branch: true
