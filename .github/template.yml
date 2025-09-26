@@ -1,10 +1,12 @@
-template-repository: 'tschm/latex'
-template-branch: 'main'
+template-repository: "tschm/latex"
+template-branch: "main"
 include: |
-  .gitignore
-  .editorconfig
   .github
   templates
+  .gitignore
   .markdownlint.json
+  .editorconfig
   .pre-commit-config.yaml
+  Makefile
 exclude: |
+  .github/workflows/latex.yml
