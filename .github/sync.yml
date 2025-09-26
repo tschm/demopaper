@@ -1,0 +1,7 @@
+tschm/latex@main:
+  - .gitignore
+  - .editorconfig
+  - .github
+  - templates
+  - .markdownlint.yaml
+  - .pre-commit-config.yaml
