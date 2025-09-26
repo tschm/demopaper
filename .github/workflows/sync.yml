@@ -12,21 +12,6 @@
 #   - 🔄 Sync configuration templates
 #   - 📝 Create a pull request with the changes
 
-
-# This file is part of the tschm/.config-templates repository
-# (https://github.com/tschm/.config-templates).
-#
-# Workflow: Sync
-# Purpose: This workflow synchronizes configuration files from the template repository
-#          to other repositories, creating a pull request with the changes.
-#
-# Trigger: This workflow runs manually via workflow_dispatch
-#
-# Components:
-#   - 📥 Checkout the target repository
-#   - 🔄 Sync configuration templates
-#   - 📝 Create a pull request with the changes
-
 name: Sync Files
 
 on:
@@ -45,14 +30,10 @@ jobs:
         with:
           GH_PAT: ${{ secrets.PAT_TOKEN }}
 
-#permissions:
-#  contents: write  # Needed to create releases
-
 #env:
 #  TEMPLATE_REPO: 'tschm/latex'
 #  TEMPLATE_BRANCH: 'main'
 #  TARGET_BRANCH: 'sync/update'
-
 #jobs:
 #  sync:
 #    runs-on: ubuntu-latest
