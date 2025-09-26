@@ -27,4 +27,4 @@ jobs:
         uses: jebel-quant/sync_template@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          source: .github/sync.yml
+          source: .github/template.yml

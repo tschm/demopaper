@@ -1,0 +1,9 @@
+template-repository: 'tschm/latex'
+template-branch: 'main'
+include: |
+  .gitignore
+  .editorconfig
+  .github
+  templates
+  .markdownlint.json
+  .pre-commit-config.yaml
