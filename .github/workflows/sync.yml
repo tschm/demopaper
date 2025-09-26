@@ -20,22 +20,11 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
       - name: Sync specific folders from template
         uses: jebel-quant/sync_template@main
         with:
           token: ${{ secrets.PAT_TOKEN }}
           source: .github/sync.yml
-          #source_repo: tschm/latex        # <-- your template repo
-          #source_branch: main                          # <-- template branch
-          #destination_branch: sync/update-configs      # <-- branch for PR
-          #github_token: ${{ secrets.PAT }}             # <-- your PAT
-          #pr_title: "chore: sync config templates"
-          #pr_body: "This PR syncs updated config templates from the upstream template repository."
-          #pr_assignees: tschm                          # optional
-          #files: |                                     # <-- only these folders/files will be synced
-          #  .github
-          #  .editorconfig
-          #  .gitignore
-          #  templates
-          #  .markdownlint.json
-          #  .pre-commit-config.yaml
