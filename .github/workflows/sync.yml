@@ -61,5 +61,3 @@ jobs:
 #            .markdownlint.yaml
 #            .editorconfig
 #            .pre-commit-config.yaml
-
-            Makefile
