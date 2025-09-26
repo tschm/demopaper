@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: '0'
+          persist-credentials: 'false'
 
       - name: Sync specific folders from template
         uses: jebel-quant/sync_template@main
