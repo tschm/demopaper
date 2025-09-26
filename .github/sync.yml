@@ -3,5 +3,5 @@ tschm/latex@main:
   - .editorconfig
   - .github
   - templates
-  - .markdownlint.yaml
+  - .markdownlint.json
   - .pre-commit-config.yaml
