@@ -1,4 +1,6 @@
-tschm/latex@main:
+template-repository: 'tschm/latex'
+template-branch: 'main'
+include:
   - .gitignore
   - .editorconfig
   - .github
