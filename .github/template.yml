@@ -1,5 +1,5 @@
 template-repository: "tschm/latex"
-template-branch: "v0.0.4"
+template-branch: "main"
 include: |
   .github
   templates
