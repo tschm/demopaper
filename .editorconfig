@@ -1,3 +1,6 @@
+# This file is part of the tschm/latex repository
+# (https://github.com/tschm/latex).
+#
 root = true
 
 [*.{py,rst,txt}]
