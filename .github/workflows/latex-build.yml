@@ -47,7 +47,7 @@ jobs:
           echo "TEX_FILENAME=${FILENAME}" >> $GITHUB_ENV
 
       - name: Upload compiled PDF as artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ env.TEX_FILENAME }}
           path: ${{ inputs.working-directory }}/${{ env.TEX_FILENAME }}.pdf
