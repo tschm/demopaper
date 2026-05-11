@@ -1,0 +1,16 @@
+site_name: demopaper
+site_dir: site
+
+site_author: Thomas Schmelzer
+
+copyright: Copyright &copy; 2024–2026 Thomas Schmelzer
+
+nav:
+  - Document: document.pdf
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: indigo
