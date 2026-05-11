@@ -46,3 +46,5 @@ install: ## install tectonic
 .PHONY: fmt
 fmt: uv ## Run autoformatting and linting
 	@uvx pre-commit run --all-files  # Run all pre-commit hooks on all files
+
+-include .rhiza/rhiza.mk

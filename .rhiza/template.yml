@@ -1,0 +1,11 @@
+repository: tschm/latex
+ref: main
+template-host: github
+language: python
+include:
+- .github
+- .pre-commit-config.yaml
+- .editorconfig
+- .gitignore
+- .markdownlint.json
+exclude: []
