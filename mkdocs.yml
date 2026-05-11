@@ -6,7 +6,7 @@ site_author: Thomas Schmelzer
 copyright: Copyright &copy; 2024–2026 Thomas Schmelzer
 
 nav:
-  - Document: document.pdf
+  - Document: index.md
 
 theme:
   name: material
