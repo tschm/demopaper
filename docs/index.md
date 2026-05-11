@@ -1,1 +1,7 @@
-<iframe src="document.pdf" width="100%" height="100%" style="border: none; min-height: 90vh;"></iframe>
+# demopaper
+
+This repository provides a comprehensive LaTeX template for academic papers
+with automated build and release processes.
+It features customizable headers, environment variable integration,
+GitHub Actions workflows for continuous integration, and a streamlined
+development workflow using Tectonic for reliable LaTeX compilation.
