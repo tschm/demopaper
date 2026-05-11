@@ -1,34 +1,25 @@
-# Workflow to run pre-commit checks on the codebase
-# This workflow runs automatically on every push to the repository
-
-name: pre-commit
+name: Pre-commit
 
 on:
-  push:  # Trigger on push events
-
-# Only read access is needed for pre-commit checks
-permissions:
-  contents: read  # Read-only access to repository contents
+  push:
+  pull_request:
 
 jobs:
-  # Job to run pre-commit checks on the repository
   pre-commit:
+    name: Pre-commit hooks
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Check out the repository code
-      # This ensures we have the latest code from the specified ref
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v6  # Official GitHub checkout action
+      - uses: actions/checkout@v6.0.2
 
-      # Step 2: Set up Node.js environment
-      # This is required for some pre-commit hooks that use Node.js
-      - name: Install Node 22
-        uses: actions/setup-node@v6  # Official Node.js setup action
+      - name: Cache pre-commit environments
+        uses: actions/cache@v5
         with:
-          node-version: '24'  # Use Node.js version 22
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            pre-commit-${{ runner.os }}-
 
-      # Step 3: Run all pre-commit hooks on all files
-      # This executes all hooks defined in .pre-commit-config.yaml
-      - uses: pre-commit/action@v3.0.1  # Official pre-commit GitHub Action
-        with:
-          extra_args: '--verbose --all-files'  # Run on all files with verbose output
+      - name: Run pre-commit
+        run: |
+          make fmt
