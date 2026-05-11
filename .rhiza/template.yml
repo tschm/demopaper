@@ -2,12 +2,5 @@ repository: tschm/latex
 ref: main
 template-host: github
 language: python
-templates:
-- core
-- tests
-- book
-- marimo
-- presentation
-- github
 include: []
 exclude: []
